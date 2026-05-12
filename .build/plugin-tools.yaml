@@ -1,0 +1,66 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "BreakTimer-arm64-apple-macosx-release.exe": ["<BreakTimer-arm64-apple-macosx-release.exe>"]
+  "BreakTimer-arm64-apple-macosx-release.module": ["<BreakTimer-arm64-apple-macosx-release.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<BreakTimer-arm64-apple-macosx-release.exe>","<BreakTimer-arm64-apple-macosx-release.module>"]
+  "test": ["<BreakTimer-arm64-apple-macosx-release.exe>","<BreakTimer-arm64-apple-macosx-release.module>"]
+default: "main"
+nodes:
+  "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/ActivityMonitor.swift","/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/AppDelegate.swift","/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/SparklineView.swift","/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/main.swift"]
+    outputs: ["/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/sources"]
+    description: "Write auxiliary file /Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/sources"
+
+  "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/ActivityMonitor.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/AppDelegate.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/SparklineView.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/main.swift.o"]
+    outputs: ["/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.product/Objects.LinkFileList"
+
+  "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
+    outputs: ["/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt"
+
+  "<BreakTimer-arm64-apple-macosx-release.exe>":
+    tool: phony
+    inputs: ["/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer"]
+    outputs: ["<BreakTimer-arm64-apple-macosx-release.exe>"]
+
+  "<BreakTimer-arm64-apple-macosx-release.module>":
+    tool: phony
+    inputs: ["/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/ActivityMonitor.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/AppDelegate.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/SparklineView.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/main.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Modules/BreakTimer.swiftmodule"]
+    outputs: ["<BreakTimer-arm64-apple-macosx-release.module>"]
+
+  "C.BreakTimer-arm64-apple-macosx-release.exe":
+    tool: shell
+    inputs: ["/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/ActivityMonitor.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/AppDelegate.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/SparklineView.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/main.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.product/Objects.LinkFileList"]
+    outputs: ["/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer"]
+    description: "Linking ./.build/arm64-apple-macosx/release/BreakTimer"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release","-o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer","-module-name","BreakTimer","-Xlinker","-no_warn_duplicate_libraries","-emit-executable","-Xlinker","-dead_strip","-Xlinker","-alias","-Xlinker","_BreakTimer_main","-Xlinker","_main","-Xlinker","-rpath","-Xlinker","@loader_path","@/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx","-target","arm64-apple-macosx13.0","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
+
+  "C.BreakTimer-arm64-apple-macosx-release.module":
+    tool: shell
+    inputs: ["/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/ActivityMonitor.swift","/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/AppDelegate.swift","/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/SparklineView.swift","/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/main.swift","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/sources"]
+    outputs: ["/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/ActivityMonitor.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/AppDelegate.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/SparklineView.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/main.swift.o","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Modules/BreakTimer.swiftmodule"]
+    description: "Compiling Swift Module 'BreakTimer' (4 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","BreakTimer","-emit-dependencies","-emit-module","-emit-module-path","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Modules/BreakTimer.swiftmodule","-output-file-map","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/output-file-map.json","-whole-module-optimization","-num-threads","10","-c","@/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/sources","-I","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Modules","-target","arm64-apple-macosx13.0","-whole-module-optimization","-num-threads","10","-serialize-diagnostics","-O","-j10","-DSWIFT_PACKAGE","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","BreakTimer_main","-swift-version","5","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","caffeinate"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/","/Users/alex/dev/2026/macos/caffeinate/Package.swift","/Users/alex/dev/2026/macos/caffeinate/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

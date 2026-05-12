@@ -1,0 +1,103 @@
+Commercial Software License Agreement
+
+Copyright (c) 2026 Alex Fitterling. All Rights Reserved.
+
+1. Definitions
+
+   "Software" means the source code, object code, binaries, documentation, and
+   any related materials contained in this repository or distributed under this
+   License.
+
+   "Licensor" means Alex Fitterling, the sole owner of all rights, title, and
+   interest in the Software.
+
+   "Licensee" means the individual or legal entity that has obtained a valid,
+   written commercial license from the Licensor to use the Software.
+
+2. Ownership
+
+   The Software is the exclusive property of Alex Fitterling and is protected
+   by copyright law and international treaty provisions. The Licensor retains
+   all right, title, and interest in and to the Software, including all
+   intellectual property rights therein. No ownership rights are transferred
+   by this License.
+
+3. Grant of License
+
+   Subject to Licensee's full compliance with the terms of this License and
+   payment of all applicable fees, the Licensor grants Licensee a
+   non-exclusive, non-transferable, non-sublicensable, revocable license to
+   use the Software solely for the purposes and within the scope expressly
+   agreed in writing between Licensor and Licensee.
+
+4. Restrictions
+
+   Without the prior express written consent of the Licensor, Licensee shall
+   not:
+
+     (a) copy, reproduce, distribute, publish, display, sell, rent, lease,
+         lend, or otherwise transfer the Software or any portion thereof;
+
+     (b) modify, adapt, translate, reverse engineer, decompile, disassemble,
+         or create derivative works based on the Software;
+
+     (c) remove, alter, or obscure any proprietary notices (including
+         copyright and trademark notices) on or in the Software;
+
+     (d) use the Software to provide services to third parties (including,
+         without limitation, as a service bureau, application service
+         provider, or in any time-sharing arrangement); or
+
+     (e) use the Software for any unlawful purpose or in any manner
+         inconsistent with this License.
+
+5. Commercial Use
+
+   Any commercial use of the Software, including but not limited to use within
+   a business, by a for-profit entity, or in connection with revenue-
+   generating activities, requires a separate, paid commercial license
+   executed in writing with the Licensor. To obtain a commercial license,
+   contact the Licensor at the address provided below.
+
+6. No Warranty
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NONINFRINGEMENT. THE ENTIRE
+   RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH THE
+   LICENSEE.
+
+7. Limitation of Liability
+
+   IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING
+   FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+   DEALINGS IN THE SOFTWARE, INCLUDING WITHOUT LIMITATION ANY DIRECT,
+   INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+   (INCLUDING LOSS OF PROFITS, REVENUE, DATA, OR USE), EVEN IF ADVISED OF THE
+   POSSIBILITY OF SUCH DAMAGES.
+
+8. Termination
+
+   This License is effective until terminated. The Licensor may terminate
+   this License at any time upon written notice if Licensee breaches any of
+   its terms. Upon termination, Licensee must cease all use of the Software
+   and destroy all copies in its possession or control. Sections 2, 4, 6, 7,
+   and 9 shall survive termination.
+
+9. Governing Law
+
+   This License shall be governed by and construed in accordance with the
+   laws of the jurisdiction in which the Licensor resides, without regard to
+   its conflict of laws principles. Any dispute arising under or in
+   connection with this License shall be subject to the exclusive
+   jurisdiction of the competent courts of that jurisdiction.
+
+10. Contact
+
+    For licensing inquiries, please contact:
+
+        Alex Fitterling
+        info@sp33c.tech
+
+All rights not expressly granted herein are reserved by the Licensor.

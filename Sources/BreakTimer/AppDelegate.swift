@@ -451,7 +451,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             // we never risk starting playback unexpectedly.
             return { completion in completion(false) }
         }
-        typealias Fn = @convention(c) (DispatchQueue, @convention(block) (Bool) -> Void) -> Void
+        typealias Fn = @convention(c) (DispatchQueue, @escaping @convention(block) (Bool) -> Void) -> Void
         let fn = unsafeBitCast(sym, to: Fn.self)
         return { completion in fn(.main, completion) }
     }()

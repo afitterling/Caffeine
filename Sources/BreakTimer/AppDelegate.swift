@@ -408,7 +408,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func presentBreakOverlay() {
         if breakWindow != nil { return }
         breakInProgress = true
-        sendMediaPlayPauseKey()
+        pauseSystemMediaIfPlaying()
         let win = BreakWindow(
             breakDurationSeconds: breakDurationSeconds,
             onDecline: { [weak self] in
@@ -428,6 +428,33 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         breakWindow = win
         win.show()
     }
+
+    /// Ask the system whether anything is currently playing, and only send
+    /// Play/Pause if so — otherwise the key would *start* playback, since
+    /// the media key is a toggle.
+    private func pauseSystemMediaIfPlaying() {
+        Self.isSystemMediaPlaying { [weak self] playing in
+            guard playing, let self else { return }
+            self.sendMediaPlayPauseKey()
+        }
+    }
+
+    /// Loads the private MediaRemote framework once and caches the
+    /// `MRMediaRemoteGetNowPlayingApplicationIsPlaying` symbol. The framework
+    /// is left loaded for the lifetime of the app (cheap, ~one page).
+    private static let isSystemMediaPlaying: (@escaping (Bool) -> Void) -> Void = {
+        let path = "/System/Library/PrivateFrameworks/MediaRemote.framework/MediaRemote"
+        guard let handle = dlopen(path, RTLD_LAZY),
+              let sym = dlsym(handle, "MRMediaRemoteGetNowPlayingApplicationIsPlaying")
+        else {
+            // Framework missing or symbol gated: assume nothing's playing so
+            // we never risk starting playback unexpectedly.
+            return { completion in completion(false) }
+        }
+        typealias Fn = @convention(c) (DispatchQueue, @convention(block) (Bool) -> Void) -> Void
+        let fn = unsafeBitCast(sym, to: Fn.self)
+        return { completion in fn(.main, completion) }
+    }()
 
     /// Send a single Play/Pause media-key press to whichever app owns the
     /// system "Now Playing" session (Music, Safari/Chrome video, Spotify, etc.).

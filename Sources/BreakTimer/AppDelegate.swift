@@ -51,6 +51,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var stateItem: NSMenuItem!
     private var rateItem: NSMenuItem!
     private var totalItem: NSMenuItem!
+    private var timeToBreakItem: NSMenuItem!
     private var sparklineView: SparklineView!
 
     // MARK: Lifecycle
@@ -102,6 +103,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         stateItem = NSMenuItem(title: "State: Idle", action: nil, keyEquivalent: "")
         stateItem.isEnabled = false
         menu.addItem(stateItem)
+
+        timeToBreakItem = NSMenuItem(title: "Time to break: —", action: nil, keyEquivalent: "")
+        timeToBreakItem.isEnabled = false
+        menu.addItem(timeToBreakItem)
 
         rateItem = NSMenuItem(title: "Switches/min: 0", action: nil, keyEquivalent: "")
         rateItem.isEnabled = false
@@ -280,6 +285,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Menu rows + sparkline.
         stateItem.title = "State: \(state.label)"
+        let secsToBreak = max(0, breakIntervalSeconds - activeSeconds)
+        if breakInProgress {
+            timeToBreakItem.title = "Break in progress"
+        } else if isSnoozed() {
+            timeToBreakItem.title = "Snoozed"
+        } else if state.countsAsActive {
+            timeToBreakItem.title = "Time to break: \(formatDuration(secsToBreak))"
+        } else {
+            timeToBreakItem.title = "Time to break: \(formatDuration(secsToBreak)) (paused)"
+        }
         rateItem.title = "Switches/min: \(perMinute)"
         totalItem.title = "Last 10 min total: \(totalRecent)"
         sparklineView.buckets = computeBuckets(now: now)

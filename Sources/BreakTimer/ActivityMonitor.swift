@@ -11,7 +11,7 @@ enum ActivityState: String {
     var symbolName: String {
         switch self {
         case .typing:   return "keyboard"
-        case .clicking: return "cursorarrow.rays"
+        case .clicking: return "cursorarrow"
         case .watching: return "eye"
         case .idle:     return "moon.zzz"
         }

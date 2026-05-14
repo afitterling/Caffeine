@@ -1,4 +1,5 @@
 import Cocoa
+import IOKit.hidsystem
 import UserNotifications
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
@@ -407,6 +408,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func presentBreakOverlay() {
         if breakWindow != nil { return }
         breakInProgress = true
+        sendMediaPlayPauseKey()
         let win = BreakWindow(
             breakDurationSeconds: breakDurationSeconds,
             onDecline: { [weak self] in
@@ -425,6 +427,32 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         )
         breakWindow = win
         win.show()
+    }
+
+    /// Send a single Play/Pause media-key press to whichever app owns the
+    /// system "Now Playing" session (Music, Safari/Chrome video, Spotify, etc.).
+    /// Toggle semantics, so we only fire on break start — never auto-resume.
+    private func sendMediaPlayPauseKey() {
+        func post(down: Bool) {
+            let flags: NSEvent.ModifierFlags = NSEvent.ModifierFlags(
+                rawValue: UInt(down ? 0xa00 : 0xb00)
+            )
+            let data1 = (NX_KEYTYPE_PLAY << 16) | ((down ? 0xa : 0xb) << 8)
+            guard let event = NSEvent.otherEvent(
+                with: .systemDefined,
+                location: .zero,
+                modifierFlags: flags,
+                timestamp: 0,
+                windowNumber: 0,
+                context: nil,
+                subtype: 8,
+                data1: Int(data1),
+                data2: -1
+            ) else { return }
+            event.cgEvent?.post(tap: .cghidEventTap)
+        }
+        post(down: true)
+        post(down: false)
     }
 
     private func osascriptNotify(title: String, body: String) {

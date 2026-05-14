@@ -6,23 +6,19 @@ import Cocoa
 final class BreakWindow: NSWindowController {
 
     private let breakDurationSeconds: Int
-    private let onAccept: () -> Void
     private let onDecline: () -> Void
     private let onFinish: () -> Void
 
     private var countdownTimer: Timer?
     private var remainingSeconds: Int = 0
     private var countdownLabel: NSTextField?
-    private var promptContainer: NSView?
     private var gradientLayer: CAGradientLayer?
 
     init(breakDurationSeconds: Int,
-         onAccept: @escaping () -> Void,
          onDecline: @escaping () -> Void,
          onFinish: @escaping () -> Void)
     {
         self.breakDurationSeconds = breakDurationSeconds
-        self.onAccept = onAccept
         self.onDecline = onDecline
         self.onFinish = onFinish
 
@@ -51,7 +47,7 @@ final class BreakWindow: NSWindowController {
         self.gradientLayer = gradient
         window.contentView = content
 
-        installPromptUI(on: content)
+        installCountdownUI(on: content)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -74,71 +70,18 @@ final class BreakWindow: NSWindowController {
         return g
     }
 
-    // MARK: - Phase 1: prompt
+    // MARK: - Countdown
 
-    private func installPromptUI(on content: NSView) {
-        let container = NSView(frame: content.bounds)
-        container.autoresizingMask = [.width, .height]
-        content.addSubview(container)
-        promptContainer = container
-
-        let title = label(text: "Time for a break",
-                          size: 64, weight: .ultraLight, alpha: 1.0)
-        let subtitle = label(text: "Look away. Stretch. Breathe.",
-                             size: 22, weight: .regular, alpha: 0.85)
-
-        let durLabel: String = {
-            let m = breakDurationSeconds / 60
-            let s = breakDurationSeconds % 60
-            if m > 0 && s == 0 { return "\(m)m" }
-            if m > 0 { return "\(m)m \(s)s" }
-            return "\(s)s"
-        }()
-
-        let acceptBtn = bigButton(title: "Take a break \(durLabel)", filled: true)
-        acceptBtn.target = self
-        acceptBtn.action = #selector(acceptTapped)
-
-        let declineBtn = bigButton(title: "Decline", filled: false)
-        declineBtn.target = self
-        declineBtn.action = #selector(declineTapped)
-
-        for v in [title, subtitle, acceptBtn, declineBtn] {
-            v.translatesAutoresizingMaskIntoConstraints = false
-            container.addSubview(v)
-        }
-
-        NSLayoutConstraint.activate([
-            title.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            title.centerYAnchor.constraint(equalTo: container.centerYAnchor, constant: -80),
-
-            subtitle.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            subtitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 16),
-
-            acceptBtn.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 60),
-            acceptBtn.centerXAnchor.constraint(equalTo: container.centerXAnchor, constant: -130),
-            acceptBtn.widthAnchor.constraint(equalToConstant: 240),
-            acceptBtn.heightAnchor.constraint(equalToConstant: 52),
-
-            declineBtn.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 60),
-            declineBtn.centerXAnchor.constraint(equalTo: container.centerXAnchor, constant: 130),
-            declineBtn.widthAnchor.constraint(equalToConstant: 240),
-            declineBtn.heightAnchor.constraint(equalToConstant: 52),
-        ])
-    }
-
-    // MARK: - Phase 2: countdown
-
-    private func startCountdown() {
-        promptContainer?.removeFromSuperview()
-        promptContainer = nil
-
-        guard let content = window?.contentView else { return }
-
+    private func installCountdownUI(on content: NSView) {
         remainingSeconds = breakDurationSeconds
 
+        let title = label(text: "Break time",
+                          size: 28, weight: .regular, alpha: 0.85)
+        title.translatesAutoresizingMaskIntoConstraints = false
+        content.addSubview(title)
+
         let timeLabel = NSTextField(labelWithString: formatTime(remainingSeconds))
-        timeLabel.font = NSFont.monospacedDigitSystemFont(ofSize: 160, weight: .ultraLight)
+        timeLabel.font = NSFont.monospacedDigitSystemFont(ofSize: 180, weight: .ultraLight)
         timeLabel.textColor = .white
         timeLabel.alignment = .center
         timeLabel.isBezeled = false
@@ -148,28 +91,31 @@ final class BreakWindow: NSWindowController {
         content.addSubview(timeLabel)
         countdownLabel = timeLabel
 
-        let hint = label(text: "Relax — the break ends automatically.",
+        let hint = label(text: "Look away. Stretch. Breathe.",
                          size: 18, weight: .regular, alpha: 0.7)
         hint.translatesAutoresizingMaskIntoConstraints = false
         content.addSubview(hint)
 
-        let endEarly = bigButton(title: "End break early", filled: false)
-        endEarly.target = self
-        endEarly.action = #selector(endEarlyTapped)
-        endEarly.translatesAutoresizingMaskIntoConstraints = false
-        content.addSubview(endEarly)
+        let declineBtn = bigButton(title: "Decline", filled: false)
+        declineBtn.target = self
+        declineBtn.action = #selector(declineTapped)
+        declineBtn.translatesAutoresizingMaskIntoConstraints = false
+        content.addSubview(declineBtn)
 
         NSLayoutConstraint.activate([
+            title.centerXAnchor.constraint(equalTo: content.centerXAnchor),
+            title.bottomAnchor.constraint(equalTo: timeLabel.topAnchor, constant: -8),
+
             timeLabel.centerXAnchor.constraint(equalTo: content.centerXAnchor),
-            timeLabel.centerYAnchor.constraint(equalTo: content.centerYAnchor, constant: -40),
+            timeLabel.centerYAnchor.constraint(equalTo: content.centerYAnchor, constant: -30),
 
             hint.centerXAnchor.constraint(equalTo: content.centerXAnchor),
-            hint.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 28),
+            hint.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 24),
 
-            endEarly.centerXAnchor.constraint(equalTo: content.centerXAnchor),
-            endEarly.topAnchor.constraint(equalTo: hint.bottomAnchor, constant: 50),
-            endEarly.widthAnchor.constraint(equalToConstant: 240),
-            endEarly.heightAnchor.constraint(equalToConstant: 44),
+            declineBtn.centerXAnchor.constraint(equalTo: content.centerXAnchor),
+            declineBtn.topAnchor.constraint(equalTo: hint.bottomAnchor, constant: 56),
+            declineBtn.widthAnchor.constraint(equalToConstant: 240),
+            declineBtn.heightAnchor.constraint(equalToConstant: 44),
         ])
 
         let t = Timer(timeInterval: 1.0, repeats: true) { [weak self] _ in
@@ -191,19 +137,9 @@ final class BreakWindow: NSWindowController {
 
     // MARK: - Actions
 
-    @objc private func acceptTapped() {
-        onAccept()
-        startCountdown()
-    }
-
     @objc private func declineTapped() {
         teardown()
         onDecline()
-    }
-
-    @objc private func endEarlyTapped() {
-        // Treat manual end-early as a completed break — they at least paused.
-        finishBreak()
     }
 
     private func finishBreak() {

@@ -394,7 +394,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         breakInProgress = true
         let win = BreakWindow(
             breakDurationSeconds: breakDurationSeconds,
-            onAccept: { /* user accepted; countdown started */ },
             onDecline: { [weak self] in
                 guard let self else { return }
                 self.breakWindow = nil

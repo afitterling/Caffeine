@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build BreakTimer and assemble a runnable .app bundle next to it.
 # Usage: ./build.sh         (builds into ./BreakTimer.app)
-#        ./build.sh install (also copies into ~/Applications)
+#        ./build.sh install (also copies into /Applications)
 set -euo pipefail
 
 cd "$(dirname "$0")"
@@ -48,8 +48,7 @@ codesign --force --deep --sign - "$BUNDLE" >/dev/null 2>&1 || true
 echo "✓ Built ${PWD}/${BUNDLE}"
 
 if [[ "${1:-}" == "install" ]]; then
-  DEST="${HOME}/Applications"
-  mkdir -p "$DEST"
+  DEST="/Applications"
   rm -rf "${DEST}/${BUNDLE}"
   cp -R "$BUNDLE" "$DEST/"
   echo "✓ Installed to ${DEST}/${BUNDLE}"

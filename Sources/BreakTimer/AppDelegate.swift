@@ -11,6 +11,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let resetIdleThreshold: TimeInterval = 5 * 60
     /// Available break intervals offered in the menu.
     private let intervalChoices: [Int] = [15, 20, 25, 30, 45, 60, 90]
+    /// Available break durations (seconds) offered in the menu.
+    private let breakDurationChoices: [Int] = [60, 120, 180, 300, 480, 600, 900, 1200]
+    /// Default break duration (seconds) — 8 minutes.
+    private var breakDurationSeconds: Int = 8 * 60
     /// Sliding window for the thrash threshold.
     private let switchWindow: TimeInterval = 30
     /// Switches in `switchWindow` that trigger the "hold" prompt.
@@ -32,6 +36,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var breakIntervalSeconds: Int = 20 * 60
     private var lastState: ActivityState = .idle
     private var snoozedUntil: Date?
+
+    private var breakWindow: BreakWindow?
+    private var breakInProgress = false
 
     private var switchTimestamps: [Date] = []
     private var lastSwitchPromptAt: Date?
@@ -142,6 +149,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         intervalParent.submenu = intervalMenu
         menu.addItem(intervalParent)
 
+        let durationParent = NSMenuItem(title: "Break duration", action: nil, keyEquivalent: "")
+        let durationMenu = NSMenu()
+        for secs in breakDurationChoices {
+            let label: String = secs >= 60
+                ? (secs % 60 == 0 ? "\(secs / 60) min" : "\(secs / 60)m \(secs % 60)s")
+                : "\(secs) sec"
+            let item = NSMenuItem(title: label,
+                                  action: #selector(setBreakDuration(_:)),
+                                  keyEquivalent: "")
+            item.target = self
+            item.tag = secs
+            item.state = (secs == breakDurationSeconds) ? .on : .off
+            durationMenu.addItem(item)
+        }
+        durationParent.submenu = durationMenu
+        menu.addItem(durationParent)
+
         menu.addItem(.separator())
 
         let about = NSMenuItem(title: "About BreakTimer", action: #selector(showAbout), keyEquivalent: "")
@@ -216,7 +240,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // Break reminder (silent — no time shown in the bar, just the nudge).
         if state.countsAsActive,
            activeSeconds >= breakIntervalSeconds,
-           !isSnoozed() {
+           !isSnoozed(),
+           !breakInProgress {
             fireBreakReminder()
             activeSeconds = 0
         }
@@ -341,16 +366,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // Loud audible cue.
         NSSound(named: "Glass")?.play()
 
-        // Foreground popup so it can't be missed.
-        DispatchQueue.main.async {
-            let alert = NSAlert()
-            alert.messageText = title
-            alert.informativeText = body
-            alert.alertStyle = .informational
-            alert.addButton(withTitle: "OK")
-            NSApp.activate(ignoringOtherApps: true)
-            _ = alert.runModal()
-        }
+        // Full-screen accept/decline overlay with relaxing wallpaper.
+        DispatchQueue.main.async { self.presentBreakOverlay() }
 
         // Also drop a system notification for the notification center log.
         let center = UNUserNotificationCenter.current()
@@ -370,6 +387,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         DispatchQueue.main.async { self.flashIcon() }
+    }
+
+    private func presentBreakOverlay() {
+        if breakWindow != nil { return }
+        breakInProgress = true
+        let win = BreakWindow(
+            breakDurationSeconds: breakDurationSeconds,
+            onAccept: { /* user accepted; countdown started */ },
+            onDecline: { [weak self] in
+                guard let self else { return }
+                self.breakWindow = nil
+                self.breakInProgress = false
+                // Brief snooze so we don't immediately re-prompt.
+                self.snoozedUntil = Date().addingTimeInterval(2 * 60)
+            },
+            onFinish: { [weak self] in
+                guard let self else { return }
+                self.breakWindow = nil
+                self.breakInProgress = false
+                NSSound(named: "Tink")?.play()
+            }
+        )
+        breakWindow = win
+        win.show()
     }
 
     private func osascriptNotify(title: String, body: String) {
@@ -421,6 +462,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         refresh(force: true)
     }
 
+    @objc private func setBreakDuration(_ sender: NSMenuItem) {
+        breakDurationSeconds = sender.tag
+        savePrefs()
+        if let submenu = sender.menu {
+            for item in submenu.items {
+                item.state = (item.tag == sender.tag) ? .on : .off
+            }
+        }
+    }
+
     @objc private func showAbout() {
         let alert = NSAlert()
         alert.messageText = "BreakTimer"
@@ -451,10 +502,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let d = UserDefaults.standard
         let stored = d.integer(forKey: "breakIntervalSeconds")
         if stored > 0 { breakIntervalSeconds = stored }
+        let storedDur = d.integer(forKey: "breakDurationSeconds")
+        if storedDur > 0 { breakDurationSeconds = storedDur }
     }
 
     private func savePrefs() {
-        UserDefaults.standard.set(breakIntervalSeconds, forKey: "breakIntervalSeconds")
+        let d = UserDefaults.standard
+        d.set(breakIntervalSeconds, forKey: "breakIntervalSeconds")
+        d.set(breakDurationSeconds, forKey: "breakDurationSeconds")
     }
 
     // MARK: Formatting

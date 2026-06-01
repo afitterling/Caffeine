@@ -2,12 +2,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "BreakTimer",
+    name: "Caffeinate",
     platforms: [.macOS(.v13)],
     targets: [
         .executableTarget(
-            name: "BreakTimer",
-            path: "Sources/BreakTimer"
+            name: "Caffeinate",
+            path: "Sources/Caffeinate"
         )
     ]
 )

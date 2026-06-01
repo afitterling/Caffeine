@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Build BreakTimer and assemble a runnable .app bundle next to it.
-# Usage: ./build.sh         (builds into ./BreakTimer.app)
+# Build Caffeinate and assemble a runnable .app bundle next to it.
+# Usage: ./build.sh         (builds into ./Caffeinate.app)
 #        ./build.sh install (also copies into /Applications)
 set -euo pipefail
 
 cd "$(dirname "$0")"
 
-APP_NAME="BreakTimer"
+APP_NAME="Caffeinate"
 BUNDLE="${APP_NAME}.app"
-BUNDLE_ID="local.alex.breaktimer"
+BUNDLE_ID="local.alex.caffeinate"
 
 echo "→ Building release binary…"
 swift build -c release
@@ -21,6 +21,10 @@ rm -rf "$BUNDLE"
 mkdir -p "${BUNDLE}/Contents/MacOS"
 mkdir -p "${BUNDLE}/Contents/Resources"
 cp "$BIN" "${BUNDLE}/Contents/MacOS/${APP_NAME}"
+
+if [[ -f "AppIcon.icns" ]]; then
+  cp "AppIcon.icns" "${BUNDLE}/Contents/Resources/AppIcon.icns"
+fi
 
 cat > "${BUNDLE}/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
@@ -36,6 +40,7 @@ cat > "${BUNDLE}/Contents/Info.plist" <<PLIST
   <key>CFBundlePackageType</key>     <string>APPL</string>
   <key>LSMinimumSystemVersion</key>  <string>13.0</string>
   <key>LSUIElement</key>             <true/>
+  <key>CFBundleIconFile</key>        <string>AppIcon</string>
   <key>NSHumanReadableCopyright</key><string>Local build</string>
 </dict>
 </plist>

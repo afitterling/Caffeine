@@ -1,0 +1,37 @@
+{
+  "": {
+    "dependencies": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/Caffeinate.d",
+    "object": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/Caffeinate.o",
+    "swift-dependencies": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/primary.swiftdeps"
+  },
+  "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/ActivityMonitor.swift": {
+    "object": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/ActivityMonitor.swift.o",
+    "swiftmodule": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/ActivityMonitor~partial.swiftmodule",
+    "swift-dependencies": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/ActivityMonitor.swiftdeps",
+    "diagnostics": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/ActivityMonitor.dia"
+  },
+  "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/AppDelegate.swift": {
+    "object": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/AppDelegate.swift.o",
+    "swiftmodule": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/AppDelegate~partial.swiftmodule",
+    "swift-dependencies": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/AppDelegate.swiftdeps",
+    "diagnostics": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/AppDelegate.dia"
+  },
+  "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/BreakWindow.swift": {
+    "object": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/BreakWindow.swift.o",
+    "swiftmodule": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/BreakWindow~partial.swiftmodule",
+    "swift-dependencies": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/BreakWindow.swiftdeps",
+    "diagnostics": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/BreakWindow.dia"
+  },
+  "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/SparklineView.swift": {
+    "object": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/SparklineView.swift.o",
+    "swiftmodule": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/SparklineView~partial.swiftmodule",
+    "swift-dependencies": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/SparklineView.swiftdeps",
+    "diagnostics": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/SparklineView.dia"
+  },
+  "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/main.swift": {
+    "object": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/main.swift.o",
+    "swiftmodule": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/main.swiftdeps",
+    "diagnostics": "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/main.dia"
+  }
+}

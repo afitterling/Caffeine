@@ -17,26 +17,30 @@
 
   ],
   "swiftCommands" : {
-    "C.BreakTimer-arm64-apple-macosx-release.module" : {
+    "C.Caffeinate-arm64-apple-macosx-release.module" : {
       "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
-      "fileList" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/sources",
+      "fileList" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/sources",
       "importPath" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Modules",
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/ActivityMonitor.swift"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/ActivityMonitor.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/AppDelegate.swift"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/AppDelegate.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/SparklineView.swift"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/BreakWindow.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/main.swift"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/SparklineView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/main.swift"
         },
         {
           "kind" : "file",
@@ -44,17 +48,18 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/sources"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/sources"
         }
       ],
       "isLibrary" : false,
-      "moduleName" : "BreakTimer",
-      "moduleOutputPath" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Modules/BreakTimer.swiftmodule",
+      "moduleName" : "Caffeinate",
+      "moduleOutputPath" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Modules/Caffeinate.swiftmodule",
       "objects" : [
-        "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/ActivityMonitor.swift.o",
-        "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/AppDelegate.swift.o",
-        "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/SparklineView.swift.o",
-        "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/main.swift.o"
+        "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/ActivityMonitor.swift.o",
+        "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/AppDelegate.swift.o",
+        "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/BreakWindow.swift.o",
+        "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/SparklineView.swift.o",
+        "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/main.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -73,13 +78,13 @@
         "-Xfrontend",
         "-entry-point-function-name",
         "-Xfrontend",
-        "BreakTimer_main",
+        "Caffeinate_main",
         "-swift-version",
         "5",
         "-plugin-path",
         "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
         "-sdk",
-        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
         "-F",
         "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
         "-I",
@@ -90,7 +95,7 @@
         "-Xcc",
         "-isysroot",
         "-Xcc",
-        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
         "-Xcc",
         "-F",
         "-Xcc",
@@ -102,37 +107,42 @@
         "-package-name",
         "caffeinate"
       ],
-      "outputFileMapPath" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/output-file-map.json",
+      "outputFileMapPath" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/output-file-map.json",
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/ActivityMonitor.swift.o"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/ActivityMonitor.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/AppDelegate.swift.o"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/AppDelegate.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/SparklineView.swift.o"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/BreakWindow.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/main.swift.o"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/SparklineView.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Modules/BreakTimer.swiftmodule"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/main.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Modules/Caffeinate.swiftmodule"
         }
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/ActivityMonitor.swift",
-        "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/AppDelegate.swift",
-        "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/SparklineView.swift",
-        "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/main.swift"
+        "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/ActivityMonitor.swift",
+        "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/AppDelegate.swift",
+        "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/BreakWindow.swift",
+        "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/SparklineView.swift",
+        "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/main.swift"
       ],
-      "tempsPath" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build",
+      "tempsPath" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build",
       "wholeModuleOptimization" : true
     }
   },
@@ -140,17 +150,18 @@
 
   },
   "swiftTargetScanArgs" : {
-    "BreakTimer" : [
+    "Caffeinate" : [
       "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
       "-module-name",
-      "BreakTimer",
+      "Caffeinate",
       "-package-name",
       "caffeinate",
       "-c",
-      "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/ActivityMonitor.swift",
-      "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/AppDelegate.swift",
-      "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/SparklineView.swift",
-      "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/main.swift",
+      "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/ActivityMonitor.swift",
+      "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/AppDelegate.swift",
+      "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/BreakWindow.swift",
+      "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/SparklineView.swift",
+      "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/main.swift",
       "-I",
       "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Modules",
       "-target",
@@ -169,13 +180,13 @@
       "-Xfrontend",
       "-entry-point-function-name",
       "-Xfrontend",
-      "BreakTimer_main",
+      "Caffeinate_main",
       "-swift-version",
       "5",
       "-plugin-path",
       "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
       "-sdk",
-      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
       "-F",
       "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
       "-I",
@@ -186,7 +197,7 @@
       "-Xcc",
       "-isysroot",
       "-Xcc",
-      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
       "-Xcc",
       "-F",
       "-Xcc",
@@ -202,7 +213,7 @@
     ]
   },
   "targetDependencyMap" : {
-    "BreakTimer" : [
+    "Caffeinate" : [
 
     ]
   },
@@ -218,7 +229,7 @@
     }
   },
   "writeCommands" : {
-    "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/sources" : {
+    "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/sources" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -227,24 +238,28 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/ActivityMonitor.swift"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/ActivityMonitor.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/AppDelegate.swift"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/AppDelegate.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/SparklineView.swift"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/BreakWindow.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/BreakTimer/main.swift"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/SparklineView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/Sources/Caffeinate/main.swift"
         }
       ],
-      "outputFilePath" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/sources"
+      "outputFilePath" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/sources"
     },
-    "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.product/Objects.LinkFileList" : {
+    "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.product/Objects.LinkFileList" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -253,22 +268,26 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/ActivityMonitor.swift.o"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/ActivityMonitor.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/AppDelegate.swift.o"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/AppDelegate.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/SparklineView.swift.o"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/BreakWindow.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.build/main.swift.o"
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/SparklineView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.build/main.swift.o"
         }
       ],
-      "outputFilePath" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/BreakTimer.product/Objects.LinkFileList"
+      "outputFilePath" : "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/Caffeinate.product/Objects.LinkFileList"
     },
     "/Users/alex/dev/2026/macos/caffeinate/.build/arm64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt" : {
       "alwaysOutOfDate" : true,
